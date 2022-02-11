@@ -1,5 +1,6 @@
 package com.diego.seguradoraapi.domain.model;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import com.danielfariati.annotation.CPF;
@@ -7,11 +8,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "cliente")
-public class Cliente {
+
+public class ClienteModel  implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @CPF(required = true) // indica que dado é obrigatório
@@ -29,8 +31,8 @@ public class Cliente {
 
     @Valid
     @JsonIgnoreProperties("cliente")
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Apolice> apolices = new ArrayList<>();
+    @OneToMany(mappedBy = "clienteModel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ApoliceModel> apoliceModels = new ArrayList<>();
 
 
 
@@ -67,13 +69,12 @@ public class Cliente {
         this.cidade = cidade;
     }
 
-    public List<Apolice> getApolices() {
-        return apolices;
+    public List<ApoliceModel> getApolices() {
+        return apoliceModels;
     }
 
-    public void setApolices(List<Apolice> apolices) {
-        this.apolices = apolices;
+    public void setApolices(List<ApoliceModel> apoliceModels) {
+        this.apoliceModels = apoliceModels;
     }
-
 
 }

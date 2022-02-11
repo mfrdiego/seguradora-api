@@ -1,31 +1,33 @@
 package com.diego.seguradoraapi.domain.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Past;
+import java.time.LocalDate;
 
 @Entity
-public class Apolice {
+public class ApoliceModel {
 
     @Id
-    @Column(nullable = false, length = 5)
+    @Column(nullable = false)
     private long numeroApolice;
 
-    @Column(nullable = false)
-    private LocalDateTime inicioVigencia;
+    @Past
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate inicioVigencia;
 
-    @Column(nullable = false)
-    private LocalDateTime fimVigencia;
+    @Future
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate fimVigencia;
 
-    @Column(nullable = false, length = 7)
+    @Column(length = 7)
     private String placa;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente", nullable = false)
-    private Cliente cliente;
+    @JoinColumn(name = "id_cliente")
+    private ClienteModel clienteModel;
 
 
     public long getNumeroApolice() {
@@ -36,19 +38,19 @@ public class Apolice {
         numeroApolice = numeroApolice;
     }
 
-    public LocalDateTime getInicioVigencia() {
+    public LocalDate getInicioVigencia() {
         return inicioVigencia;
     }
 
-    public void setInicioVigencia(LocalDateTime inicioVigencia) {
+    public void setInicioVigencia(LocalDate inicioVigencia) {
         inicioVigencia = inicioVigencia;
     }
 
-    public LocalDateTime getFimVigencia() {
+    public LocalDate getFimVigencia() {
         return fimVigencia;
     }
 
-    public void setFimVigencia(LocalDateTime fimVigencia) {
+    public void setFimVigencia(LocalDate fimVigencia) {
         fimVigencia = fimVigencia;
     }
 
@@ -60,11 +62,12 @@ public class Apolice {
         placa = placa;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public ClienteModel getCliente() {
+        return clienteModel;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente(ClienteModel clienteModel) {
+        this.clienteModel = clienteModel;
     }
+
 }
