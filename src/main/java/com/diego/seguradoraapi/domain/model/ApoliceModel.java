@@ -29,13 +29,12 @@ public class ApoliceModel {
     @JoinColumn(name = "id_cliente")
     private ClienteModel clienteModel;
 
-
     public long getNumeroApolice() {
         return numeroApolice;
     }
 
     public void setNumeroApolice(long numeroApolice) {
-        numeroApolice = numeroApolice;
+        this.numeroApolice = numeroApolice;
     }
 
     public LocalDate getInicioVigencia() {
@@ -43,7 +42,7 @@ public class ApoliceModel {
     }
 
     public void setInicioVigencia(LocalDate inicioVigencia) {
-        inicioVigencia = inicioVigencia;
+        this.inicioVigencia = inicioVigencia;
     }
 
     public LocalDate getFimVigencia() {
@@ -51,7 +50,7 @@ public class ApoliceModel {
     }
 
     public void setFimVigencia(LocalDate fimVigencia) {
-        fimVigencia = fimVigencia;
+        this.fimVigencia = fimVigencia;
     }
 
     public String getPlaca() {
@@ -59,15 +58,14 @@ public class ApoliceModel {
     }
 
     public void setPlaca(String placa) {
-        placa = placa;
+        this.placa = placa;
     }
 
-    public ClienteModel getCliente() {
+    public ClienteModel getClienteModel() {
         return clienteModel;
     }
 
-    public void setCliente(ClienteModel clienteModel) {
+    public void setClienteModel(ClienteModel clienteModel) {
         this.clienteModel = clienteModel;
     }
-
 }

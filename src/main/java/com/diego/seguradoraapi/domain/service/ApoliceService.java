@@ -5,6 +5,8 @@ import com.diego.seguradoraapi.domain.repository.ApoliceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ApoliceService {
@@ -19,5 +21,18 @@ public class ApoliceService {
     @Transactional
     public ApoliceModel save(ApoliceModel apoliceModel) {
         return apoliceRepository.save(apoliceModel);
+    }
+
+    public List<ApoliceModel> findAll() {
+        return apoliceRepository.findAll();
+    }
+
+    public Optional<ApoliceModel> findByNumeroApolice(long numeroApolice) {
+        return apoliceRepository.findById(numeroApolice);
+    }
+
+    @Transactional
+    public void delete(ApoliceModel apoliceModel) {apoliceRepository.delete(apoliceModel);
+
     }
 }
