@@ -1,6 +1,8 @@
 package com.diego.seguradoraapi.controller;
 ;
+import com.diego.seguradoraapi.domain.dtos.ApoliceDto;
 import com.diego.seguradoraapi.domain.dtos.ClienteDto;
+import com.diego.seguradoraapi.domain.model.ApoliceModel;
 import com.diego.seguradoraapi.domain.model.ClienteModel;
 import com.diego.seguradoraapi.domain.service.ClienteService;
 import org.springframework.beans.BeanUtils;
@@ -57,6 +59,20 @@ public class ClienteController {
         }
         clienteService.delete(clienteModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("Cliente deletado com sucesso.");
+    }
+
+    @PutMapping("/{cpf}")
+    public ResponseEntity<Object> atualizarCliente(@PathVariable(value = "cpf") String cpf,
+                                                   @RequestBody @Valid ClienteDto clienteDto) {
+        Optional<ClienteModel> clienteModelOptional = clienteService.findByCpf(cpf);
+        if (!clienteModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não encontrado");
+        }
+        ClienteModel clienteModel = clienteModelOptional.get();
+        clienteModel.setCidade(clienteDto.getCidade());
+        clienteModel.setEstado(clienteDto.getEstado());
+        clienteModel.setNome(clienteDto.getNome());
+        return ResponseEntity.status(HttpStatus.OK).body(clienteService.save(clienteModel));
     }
 }
 

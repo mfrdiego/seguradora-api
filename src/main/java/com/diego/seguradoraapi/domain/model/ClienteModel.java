@@ -16,6 +16,7 @@ public class ClienteModel  implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(nullable = false, length = 11)
     @CPF(required = true) // indica que dado é obrigatório
     private String cpf;
 

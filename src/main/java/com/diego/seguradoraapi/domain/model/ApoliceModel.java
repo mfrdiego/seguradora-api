@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class ApoliceModel {
 
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false, length = 5)
     private long numeroApolice;
 
     @Past

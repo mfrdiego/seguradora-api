@@ -44,7 +44,7 @@ public class ApoliceController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(apoliceModelOptional.get());
     }
-    
+
     @DeleteMapping("/{numeroApolice}")
     public ResponseEntity<Object> deleteApolice(@PathVariable(value = "numeroApolice") long numeroApolice){
         Optional<ApoliceModel> apoliceModelOptional = apoliceService.findByNumeroApolice(numeroApolice);
@@ -53,7 +53,20 @@ public class ApoliceController {
         }
         apoliceService.delete(apoliceModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("Apolice deletada com sucesso");
+    }
 
+    @PutMapping("/{numeroApolice}")
+    public ResponseEntity<Object> atualizarApolice(@PathVariable(value = "numeroApolice") long numeroApolice,
+                                                   @RequestBody @Valid ApoliceDto apoliceDto) {
+        Optional<ApoliceModel> apoliceModelOptional = apoliceService.findByNumeroApolice(numeroApolice);
+        if (!apoliceModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Apolice não encontrada");
+        }
+        ApoliceModel apoliceModel = apoliceModelOptional.get();
+        apoliceModel.setInicioVigencia(apoliceDto.getInicioVigencia());
+        apoliceModel.setFimVigencia(apoliceDto.getFimVigencia());
+        apoliceModel.setPlaca(apoliceDto.getPlaca());
+        return ResponseEntity.status(HttpStatus.OK).body(apoliceService.save(apoliceModel));
     }
 }
 
