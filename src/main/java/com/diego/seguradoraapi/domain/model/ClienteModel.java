@@ -30,14 +30,6 @@ public class ClienteModel  implements Serializable {
     private String cidade;
 
 
-    @Valid
-    @JsonIgnoreProperties("cliente")
-    @OneToMany(mappedBy = "clienteModel", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ApoliceModel> apoliceModels = new ArrayList<>();
-
-
-
-
     public String getNome() {
         return nome;
     }
@@ -70,12 +62,5 @@ public class ClienteModel  implements Serializable {
         this.cidade = cidade;
     }
 
-    public List<ApoliceModel> getApolices() {
-        return apoliceModels;
-    }
-
-    public void setApolices(List<ApoliceModel> apoliceModels) {
-        this.apoliceModels = apoliceModels;
-    }
 
 }
